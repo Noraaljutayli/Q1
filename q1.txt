@@ -1,0 +1,69 @@
+public class Employee {
+    private String name;
+    private String position;
+    private double basicSalary;
+    private int experience;
+    private String educationLevel;
+
+    public Employee(String name, String position, double basicSalary, int experience, String educationLevel) {
+        this.name = name;
+        this.position = position;
+        this.basicSalary = basicSalary;
+        this.experience = experience;
+        this.educationLevel = educationLevel;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public double getBasicSalary() {
+        return basicSalary;
+    }
+
+    public int getExperience() {
+        return experience;
+    }
+
+    public String getEducationLevel() {
+        return educationLevel;
+    }
+
+    public double getSalary() {
+        double salary = basicSalary + (basicSalary * 0.05 * experience);
+
+        if (educationLevel.equalsIgnoreCase("Bachelor Degree")) {
+            salary += 500;
+        } else if (educationLevel.equalsIgnoreCase("Diploma")) {
+            salary += 250;
+        }
+
+        return salary;
+    }
+
+    public double getBonus() {
+        if (this instanceof FullTimeEmployee) {
+            return basicSalary * 0.03;
+        } else if (this instanceof PartTimeEmployee) {
+            return basicSalary * 0.015;
+        } else {
+            return 0;
+        }
+    }
+}
+
+public class FullTimeEmployee extends Employee {
+    public FullTimeEmployee(String name, String position, double basicSalary, int experience, String educationLevel) {
+        super(name, position, basicSalary, experience, educationLevel);
+    }
+}
+
+public class PartTimeEmployee extends Employee {
+    public PartTimeEmployee(String name, String position, double basicSalary, int experience, String educationLevel) {
+        super(name, position, basicSalary, experience, educationLevel);
+    }
+}
